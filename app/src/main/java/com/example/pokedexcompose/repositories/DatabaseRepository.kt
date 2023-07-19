@@ -1,7 +1,6 @@
 package com.example.pokedexcompose.repositories
 
 import android.content.Context
-import android.util.Log
 import com.example.pokedexcompose.database.PokemonEntity
 import com.example.pokedexcompose.database.PokemonRoomDatabase
 
@@ -14,10 +13,6 @@ class DatabaseRepository(
 
     suspend fun addFavoritePokemon(pokemon: PokemonEntity) {
         database.addFavoritePokemon(pokemon)
-        val favorites = database.getAllFavorites()
-        for (favorite in favorites) {
-            Log.d("FAVORITES", favorite.toString())
-        }
     }
 
     fun getPokemonById(id: Int): PokemonEntity {

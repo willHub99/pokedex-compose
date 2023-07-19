@@ -8,5 +8,5 @@ data class PageState(
     val error: String = "",
     val actualLimit: Int = 20,
     val actualOffset: Int = 0,
-    val hasNewPage: Boolean = false
+    val hasNewPage: Boolean = true
 )

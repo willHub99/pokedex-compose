@@ -1,21 +1,13 @@
 package com.example.pokedexcompose.viewmodels
 
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedexcompose.model.PokemonModel
-import com.example.pokedexcompose.network.models.PokeApiResponse
-import com.example.pokedexcompose.network.models.Pokemon
 import com.example.pokedexcompose.network.models.PokemonApiItemResponse
 import com.example.pokedexcompose.repositories.PokemonRepository
 import com.example.pokedexcompose.state.PageState
 import com.example.pokedexcompose.state.PokemonListState
-import com.example.pokedexcompose.utils.convertToPokemonEntity
-import com.example.pokedexcompose.utils.convertToPokemonModel
-import com.example.pokedexcompose.utils.filtered
 import com.example.pokedexcompose.utils.getIdFromUrl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,9 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import java.util.ArrayList
-import kotlin.math.ceil
 
 class HomeViewModel(
     context: Context
@@ -62,8 +52,7 @@ class HomeViewModel(
                     it.copy(
                         page = response.body(),
                         isLoading = false,
-                        actualLimit = _pageState.value.actualLimit + 20,
-                        actualOffset = _pageState.value.actualLimit,
+                        actualOffset = _pageState.value.actualOffset + _pageState.value.actualLimit,
                     )
                 }
                 response.body()?.let { response ->

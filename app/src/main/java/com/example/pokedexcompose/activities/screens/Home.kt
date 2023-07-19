@@ -4,8 +4,6 @@ package com.example.pokedexcompose.activities.screens
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -21,17 +19,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.pokedexcompose.R
 import com.example.pokedexcompose.components.CardPokemonItem
-import com.example.pokedexcompose.components.CustomCircularProgressIndicator
 import com.example.pokedexcompose.components.CustomSearchBar
 import com.example.pokedexcompose.navigation.Screen
 import com.example.pokedexcompose.state.PageState
 import com.example.pokedexcompose.state.PokemonListState
-import com.example.pokedexcompose.ui.theme.WaterColor
 import com.example.pokedexcompose.viewmodels.HomeViewModel
-import kotlinx.coroutines.launch
+import com.example.pokedexcompose.components.CustomLottieAnimation
 
 @Composable
 fun Home(
@@ -41,6 +37,8 @@ fun Home(
     val pageState: PageState by viewModel.pageState.collectAsState()
     val listPokemonState: PokemonListState by viewModel.listPokemonState.collectAsState()
 
+
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -48,7 +46,7 @@ fun Home(
         val listState = rememberLazyListState()
         val getNextPage by remember() {
             derivedStateOf {
-                listState.firstVisibleItemIndex > (pageState.actualOffset - 3)
+                listState.firstVisibleItemIndex > (pageState.actualLimit - 5)
             }
         }
         var position by rememberSaveable {
@@ -72,15 +70,10 @@ fun Home(
                 }
                 item {
                     AnimatedVisibility(visible = getNextPage) {
-                        viewModel.getMainPage()
-                        if (listPokemonState.isLoading) {
-                            CustomCircularProgressIndicator(
-                                modifier = Modifier
-                                    .size(32.dp),
-                                color = WaterColor,
-                                strokeWidth = 4
-                            )
+                        if (pageState.hasNewPage) {
+                            viewModel.getMainPage()
                         }
+                        CustomLottieAnimation(file = R.raw.pokemon_load)
                     }
                 }
             }
