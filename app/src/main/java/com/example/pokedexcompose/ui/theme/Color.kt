@@ -1,0 +1,53 @@
+package com.example.pokedexcompose.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+val Purple80 = Color(0xFFD0BCFF)
+val PurpleGrey80 = Color(0xFFCCC2DC)
+val Pink80 = Color(0xFFEFB8C8)
+
+val Purple40 = Color(0xFF6650a4)
+val PurpleGrey40 = Color(0xFF625b71)
+val Pink40 = Color(0xFF7D5260)
+
+// background pokemon card colors by type
+val NormalColor = Color(0xFF8D6B37)
+val FireColor = Color(0xFFFF8A00)
+val WaterColor = Color(0xFF001AFF)
+val GrassColor = Color(0xFF0D7A04)
+val ElectricColor = Color(0xFFFFD600)
+val IceColor = Color(0xFFA8E0FF)
+val FightingColor = Color(0xFFD31D1D)
+val PoisonColor = Color(0xFF8000FF)
+val GroundColor = Color(0xFFCF955F)
+val FlyingColor = Color(0xFFC89DFF)
+val PhysicColor = Color(0xFFFF00E5)
+val BugColor = Color(0xFF5E7A51)
+val RockColor = Color(0xFF53581A)
+val GhostColor = Color(0xFF9E00FF)
+val DragonColor = Color(0xFF666CFF)
+val DarkColor = Color(0xFF6A4C11)
+val SteelColor = Color(0xFF5D6C70)
+val FairyColor = Color(0xFFFF0099)
+val DefaultColor = Color(0xFF555554)
+
+// background pokemon Linear Progress Indicator color by type
+val NormalDarkColor = Color(0xFF6A5029)
+val FireDarkColor = Color(0xFFBF6800)
+val WaterDarkColor = Color(0xFF0014BF)
+val GrassDarkColor = Color(0xFF0A5C03)
+val ElectricDarkColor = Color(0xFFBFA100)
+val IceDarkColor = Color(0xFF7EA8BF)
+val FightingDarkColor = Color(0xFF9E1616)
+val PoisonDarkColor = Color(0xFF6000BF)
+val GroundDarkColor = Color(0xFF9B7047)
+val FlyingDarkColor = Color(0xFF9676BF)
+val PhysicDarkColor = Color(0xFFBF00AC)
+val BugDarkColor = Color(0xFF475C3D)
+val RockDarkColor = Color(0xFF3E4214)
+val GhostDarkColor = Color(0xFF7700BF)
+val DragonDarkColor = Color(0xFF4D51BF)
+val DarkDarkColor = Color(0xFF50390D)
+val SteelDarkColor = Color(0xFF465154)
+val FairyDarkColor = Color(0xFFBF0073)
+val DefaultDarkColor = Color(0xFF555554)
