@@ -7,6 +7,7 @@ import com.example.pokedexcompose.model.PokemonModel
 import com.example.pokedexcompose.network.models.PokemonApiItemResponse
 import com.example.pokedexcompose.repositories.PokemonRepository
 import com.example.pokedexcompose.state.PageState
+import com.example.pokedexcompose.state.PaginationState
 import com.example.pokedexcompose.state.PokemonListState
 import com.example.pokedexcompose.utils.getIdFromUrl
 import kotlinx.coroutines.CoroutineScope
@@ -28,6 +29,9 @@ class HomeViewModel(
     private val _pageState = MutableStateFlow(PageState())
     val pageState = _pageState.asStateFlow()
 
+    private val _paginationState = MutableStateFlow(PaginationState())
+    val paginationState = _paginationState.asStateFlow()
+
     private val _listPokemonState = MutableStateFlow(PokemonListState())
     val listPokemonState = _listPokemonState.asStateFlow()
 
@@ -44,15 +48,14 @@ class HomeViewModel(
         }
         try {
             val response = repository.getPageWithOffsetAndLimit(
-                pageState.value.actualOffset,
-                pageState.value.actualLimit
+                paginationState.value.actualOffset,
+                paginationState.value.limit
             )
             if (response.isSuccessful) {
                 _pageState.update {
                     it.copy(
                         page = response.body(),
                         isLoading = false,
-                        actualOffset = _pageState.value.actualOffset + _pageState.value.actualLimit,
                     )
                 }
                 response.body()?.let { response ->
@@ -61,7 +64,10 @@ class HomeViewModel(
             }
         } catch (e: Exception) {
             _pageState.update {
-                it.copy(error = e.message ?: "")
+                it.copy(
+                    error = e.message ?: "",
+                    isLoading = false
+                )
             }
         }
     }
@@ -88,15 +94,30 @@ class HomeViewModel(
                     isLoading = false
                 )
             }
-            _pageState.update {
+            _paginationState.update {
                 it.copy(
                     hasNewPage = listPokemonPage.isNotEmpty()
                 )
             }
         } catch (e: Exception) {
             _listPokemonState.update {
-                it.copy(error = e.message ?: "")
+                it.copy(
+                    error = e.message ?: "",
+                    isLoading = false
+                )
             }
         }
     }
+
+    fun updatePaginationState() {
+        _paginationState.update {
+            it.copy(
+                actualOffset = it.actualOffset + it.limit
+            )
+        }
+        if (paginationState.value.hasNewPage) {
+            getMainPage()
+        }
+    }
+
 }

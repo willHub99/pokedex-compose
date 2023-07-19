@@ -8,11 +8,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.pokedexcompose.activities.screens.Home
 import com.example.pokedexcompose.activities.screens.PokemonDetail
+import com.example.pokedexcompose.activities.screens.Splash
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.Home.screen) {
+    NavHost(navController = navController, startDestination = Screen.Splash.screen) {
+        composable(route = Screen.Splash.screen) {
+            Splash(navController)
+        }
         composable(route = Screen.Home.screen) {
             Home(navController)
         }
